@@ -1,15 +1,65 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        GestionStock gestionStock = new GestionStock(); // Instance de GestionStock
+        Scanner scanner = new Scanner(System.in);
+        int choix;
+        do {
+            gestionStock.printMenu(); // Appelle la méthode pour afficher le menu
+            System.out.print("Entrez votre choix : ");
+            choix = scanner.nextInt();
+            scanner.nextLine(); // Consomme la nouvelle ligne
+
+            switch (choix) {
+                case 1:
+                    System.out.print("Entrez le code : ");
+                    int code = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Entrez le nom : ");
+                    String nom = scanner.nextLine();
+                    System.out.print("Entrez la quantité : ");
+                    int quantite = scanner.nextInt();
+                    System.out.print("Entrez le prix : ");
+                    double prix = scanner.nextDouble();
+                    gestionStock.ajouterProduit(new Produit(code, nom, quantite, prix));
+                    break;
+                case 2:
+                    System.out.print("Entrez le code du produit à modifier : ");
+                    code = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Entrez le nouveau nom : ");
+                    String nouveauNom = scanner.nextLine();
+                    System.out.print("Entrez la nouvelle quantité : ");
+                    int nouvelleQuantite = scanner.nextInt();
+                    System.out.print("Entrez le nouveau prix : ");
+                    double nouveauPrix = scanner.nextDouble();
+                    gestionStock.modifierProduit(code, nouveauNom, nouvelleQuantite, nouveauPrix);
+                    break;
+                case 3:
+                    System.out.print("Entrez le code du produit à supprimer : ");
+                    code = scanner.nextInt();
+                    gestionStock.supprimerProduit(code);
+                    break;
+                case 4:
+                    gestionStock.afficherProduits();
+                    break;
+                case 5:
+                    System.out.print("Entrez le nom du produit à rechercher : ");
+                    nom = scanner.nextLine();
+                    gestionStock.rechercherProduit(nom);
+                    break;
+                case 6:
+                    gestionStock.calculerValeurStock();
+                    break;
+                case 7:
+                    System.out.println("Au revoir !");
+                    break;
+                default:
+                    System.out.println("Choix invalide. Veuillez réessayer.");
+            }
+        } while (choix != 7);
+
+        scanner.close();
     }
 }
