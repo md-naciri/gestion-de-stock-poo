@@ -6,10 +6,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int choix;
         do {
-            gestionStock.printMenu(); // Appelle la méthode pour afficher le menu
+            gestionStock.printMenu();
             System.out.print("Entrez votre choix : ");
             choix = scanner.nextInt();
-            scanner.nextLine(); // Consomme la nouvelle ligne
+            scanner.nextLine();
 
             switch (choix) {
                 case 1:
